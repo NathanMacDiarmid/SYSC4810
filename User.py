@@ -8,8 +8,8 @@ class User:
     def __str__(self) -> str:
         return f"{self.name} ({self.role})\nRead Permissions: {self.readPermissions}\nWrite Permissions: {self.writePermissions}"
     
-    def addReadPermissions(self, elem):
+    def addReadPermissions(self, elem) -> None:
         self.readPermissions.append(elem)
 
-    def addWritePermissions(self, elem):
+    def addWritePermissions(self, elem) -> None:
         self.writePermissions.append(elem)
