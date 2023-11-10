@@ -1,0 +1,31 @@
+import UI as ui
+import User
+def main():
+    #ui.renderUI()
+    mischa = User.User("Mischa Lowery", "Client")
+    veronica = User.User("Veronica Perez", "Client")
+    winston = User.User("Winston Callahan", "Teller")
+    kelan = User.User("Kelan Gough", "Teller")
+    nelson = User.User("Nelson Wilkins", "Financial Advisor")
+    kelsie = User.User("Kelsie Chang", "Financial Advisor")
+    howard = User.User("Howard Linkler", "Compliance Officer")
+    Stefania = User.User("Stefania Smart", "Compliance Officer")
+    willow = User.User("Willow Garza", "Premium Client")
+    nala = User.User("Nala Preston", "Premium Client")
+    stacy = User.User("Stacy Kent", "Investment Analyst")
+    keikilana = User.User("Keikilana Kapahu", "Investment Analyst")
+    kodi = User.User("Kodi Matthews", "Financial Planner")
+    malikah = User.User("Malikah Wu", "Financial Planner")
+    caroline = User.User("Caroline Lopez", "Technical Support")
+    pawel = User.User("Pawel Barclay", "Technical Support")
+
+    print(mischa)
+    print(winston)
+    print(nelson)
+    print(howard)
+    print(willow)
+    print(stacy)
+    print(kodi)
+    print(caroline)
+
+main()
