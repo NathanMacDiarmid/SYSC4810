@@ -3,6 +3,8 @@ import User
 import ReferenceMonitor
 def main():
     monitor = ReferenceMonitor.ReferenceMonitor()
+
+    testUser = User.User("Name Here", "Happy")
     #ui.renderUI()
     mischa = User.User("Mischa Lowery", "Client")
     veronica = User.User("Veronica Perez", "Client")
@@ -30,6 +32,8 @@ def main():
 
     # Assign Read Permission
 
+    testUser.readPermissions = monitor.assignReadPermission(testUser.role)
+
     mischa.readPermissions = monitor.assignReadPermission(mischa.role)
     veronica.readPermissions = monitor.assignReadPermission(veronica.role)
 
@@ -55,6 +59,8 @@ def main():
     pawel.readPermissions = monitor.assignReadPermission(pawel.role)
 
     # Assign Write Permission
+
+    testUser.writePermissions = monitor.assignWritePermission(testUser.role)
 
     mischa.writePermissions = monitor.assignWritePermission(mischa.role)
     veronica.writePermissions = monitor.assignWritePermission(veronica.role)
@@ -103,5 +109,7 @@ def main():
 
     print(caroline)
     print(pawel)
+
+    print(testUser)
 
 main()
