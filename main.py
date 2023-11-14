@@ -1,11 +1,13 @@
-import UI as ui
+import UI
 import User
 import ReferenceMonitor
 def main():
     monitor = ReferenceMonitor.ReferenceMonitor()
+    ui = UI.UI()
+    ui.renderUI()
 
-    testUser = User.User("Name Here", "Happy")
-    #ui.renderUI()
+    '''testUser = User.User("Name Here", "Happy")
+
     mischa = User.User("Mischa Lowery", "Client")
     veronica = User.User("Veronica Perez", "Client")
 
@@ -110,6 +112,6 @@ def main():
     print(caroline)
     print(pawel)
 
-    print(testUser)
+    print(testUser)'''
 
 main()
