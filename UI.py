@@ -3,13 +3,13 @@ class UI:
     def __init__(self) -> None:
         self.encrypt = Encrypt.Encrypt()
 
-    def renderUI(self) -> None:
+    def renderUI(self) -> str:
         print("\nFinvest Holdings")
         print("Client Holdings and Information System")
         print("---------------------------------------")
         username = input("Enter username: ")
         password = input("Enter password: ")
-        granted, returningUser = self.encrypt.login(username, password)
+        granted, returningUser, userName = self.encrypt.login(username, password)
         if (granted):
             print("ACCESS GRANTED")
         elif (not returningUser):
@@ -17,6 +17,7 @@ class UI:
         else:
             print("ACCESS DENIED")
             self.renderUI()
+        return userName
     
     def renderNewUserUI(self) -> None:
         print("\nFinvest Holdings")
@@ -36,4 +37,5 @@ class UI:
             print("- not have calendar date pattern")
             print("- not have licence plate pattern")
             print("- not have phone number pattern")
+            print("USERNAME MUST BE UNIQUE")
             self.renderNewUserUI()

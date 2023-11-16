@@ -4,12 +4,26 @@ import ReferenceMonitor
 def main():
     monitor = ReferenceMonitor.ReferenceMonitor()
     ui = UI.UI()
-    ui.renderUI()
+    name = ui.renderUI()
 
-    '''testUser = User.User("Name Here", "Happy")
+    #testUser = User.User("Name Here", "Happy")
 
-    mischa = User.User("Mischa Lowery", "Client")
-    veronica = User.User("Veronica Perez", "Client")
+    mischa = User.User("mischa", "Mischa Lowery", "Client")
+    mischa.readPermissions = monitor.assignReadPermission(mischa.role)
+    mischa.writePermissions = monitor.assignWritePermission(mischa.role)
+
+    if (name == mischa.username):
+        print("\n")
+        print("Username (ID): " + mischa.username)
+        print("Role: " + mischa.role)
+        print("Read Permissions:")
+        for i in mischa.readPermissions:
+            print(i)
+        print("Write Permissions:")
+        for j in mischa.writePermissions:
+            print(j)
+
+    '''veronica = User.User("Veronica Perez", "Client")
 
     winston = User.User("Winston Callahan", "Teller")
     kelan = User.User("Kelan Gough", "Teller")

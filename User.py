@@ -1,5 +1,6 @@
 class User:
-    def __init__(self, name, role) -> None:
+    def __init__(self, username, name, role) -> None:
+        self.username = username
         self.name = name
         self.role = role
         self.readPermissions = []

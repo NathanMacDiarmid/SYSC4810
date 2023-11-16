@@ -5,13 +5,13 @@ class Encrypt:
     def __init__(self) -> None:
         pass
 
-    def createAccount(self, username, role, readPermissions, writePermissions, passwd) -> bool:
-        if (self.checkPswd(username, passwd)):
+    def createAccount(self, username, passwd) -> bool:
+        if (self.checkPswd(username, passwd) and self.checkUsername(username)):
             file = open("passwd.txt", "a")
             salt = str(random.getrandbits(8))
             passwd = salt + passwd
             hashd = hashlib.sha512(passwd.encode())
-            file.write(username + " " + role + " " + readPermissions + " " + writePermissions + " " + salt + " " + hashd.hexdigest() + "\n")
+            file.write(username  + " " + salt + " " + hashd.hexdigest() + "\n")
             file.close()
             return True
         return False
@@ -35,7 +35,15 @@ class Encrypt:
                 hashd = hashlib.sha512(passwd.encode())
                 if (hashd.hexdigest() == acc[2]):
                     granted = True
-        return (granted, usernameExists)
+        return (granted, usernameExists, lst[0][0])
+    
+    def checkUsername(self, username) -> bool:
+        file = open("passwd.txt", "r")
+        for line in file:
+            line = line.split(" ")
+            if (line[0] == username):
+                return False
+        return True
     
     def checkPswd(self, username, passwd) -> bool:
         '''
@@ -67,7 +75,7 @@ class Encrypt:
                     if (elem == i):
                         containsSpecChar = True
                 if (isUpper and isLower and isDigit and containsSpecChar):
-                    return self.checkForLicencePlate(passwd) and self.checkForCalendar(passwd) and self.checkForPhoneNumber(passwd)
+                    return self.checkForLicencePlate(passwd) and self.checkForCalendar(passwd)
         return False
     
     def checkForLicencePlate(self, passwd) -> bool:
@@ -108,23 +116,6 @@ class Encrypt:
             elif (numberCount != 6):
                 numberCount = 0
             if (numberCount >= 6):
-                return False
-            curr += 1
-            prev = curr - 1
-        return True
-    
-    def checkForPhoneNumber(self, passwd) -> bool:
-        numberCount = 0
-        curr = 0
-        prev = 0
-        for elem in passwd:
-            if (elem.isnumeric()):
-                numberCount += 1
-            elif (passwd[curr].isnumeric() and passwd[prev].isnumeric() and numberCount > 0):
-                numberCount += 1
-            elif (numberCount != 9):
-                numberCount = 0
-            if (numberCount >= 9):
                 return False
             curr += 1
             prev = curr - 1
