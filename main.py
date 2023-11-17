@@ -2,11 +2,7 @@ import UI
 import User
 import ReferenceMonitor
 
-def main():
-    monitor = ReferenceMonitor.ReferenceMonitor()
-    ui = UI.UI()
-    loggedInUser = ui.renderUI()
-
+def instantiateUsers(monitor) -> list:
     mischa = User.User("mischa", "Mischa Lowery", "Client")
     veronica = User.User("veronica", "Veronica Perez", "Client")
 
@@ -30,19 +26,6 @@ def main():
 
     caroline = User.User("caroline", "Caroline Lopez", "Technical Support")
     pawel = User.User("pawel", "Pawel Barclay", "Technical Support")
-
-    registeredUsers = [mischa, veronica, kelan, nelson, howard, stefania, pawel,
-                       willow, nala, stacy, keikilana, kodi, malikah, caroline]
-    
-    userFound = False
-    for i in registeredUsers:
-        if (loggedInUser == i.getUsername()):
-            userFound = True
-    if (not userFound and loggedInUser != ""):
-        newUser = User.User(loggedInUser, loggedInUser, "Client")
-        registeredUsers.append(newUser)
-        newUser.setReadPermissions(monitor.assignReadPermission(newUser.getRole()))
-        newUser.setWritePermissions(monitor.assignWritePermission(newUser.getRole()))
 
     # Assign Read Permission
 
@@ -70,7 +53,7 @@ def main():
     caroline.setReadPermissions(monitor.assignReadPermission(caroline.getRole()))
     pawel.setReadPermissions(monitor.assignReadPermission(pawel.getRole()))
 
-    # Assign Write Permission
+     # Assign Write Permission
 
     mischa.setWritePermissions(monitor.assignWritePermission(mischa.getRole()))
     veronica.setWritePermissions(monitor.assignWritePermission(veronica.getRole()))
@@ -96,10 +79,28 @@ def main():
     caroline.setWritePermissions(monitor.assignWritePermission(caroline.getRole()))
     pawel.setWritePermissions(monitor.assignWritePermission(pawel.getRole()))
 
+    return [mischa, veronica, kelan, nelson, howard, stefania, pawel, winston,
+            willow, nala, stacy, keikilana, kodi, malikah, caroline, kelsie]
+
+def instantiateCreateAccountUser(loggedInUser, registeredUsers, monitor) -> list:
+    userFound = False
+    for i in registeredUsers:
+        if (loggedInUser == i.getUsername()):
+            userFound = True
+    if (not userFound and loggedInUser != ""):
+        newUser = User.User(loggedInUser, loggedInUser, "Client")
+        registeredUsers.append(newUser)
+        newUser.setReadPermissions(monitor.assignReadPermission(newUser.getRole()))
+        newUser.setWritePermissions(monitor.assignWritePermission(newUser.getRole()))
+    return registeredUsers
+
+def printUserLoggedIn(loggedInUser, registeredUsers) -> None:
     for user in registeredUsers:
         if (loggedInUser == user.getUsername()):
             print("Username (ID): " + user.getUsername())
             print("Role: " + user.getRole())
+            if (user.getRole() == "Teller"):
+                print("As a Teller, you can only access this account from 9am to 5pm")
             print("\nRead Permissions:")
             if (user.getReadPermissions() == []):
                 print("No read permissions")
@@ -112,4 +113,17 @@ def main():
             else:
                 for j in user.getWritePermissions():
                     print(j)
+
+def main():
+    monitor = ReferenceMonitor.ReferenceMonitor()
+    ui = UI.UI()
+
+    loggedInUser = ui.renderUI()
+
+    registeredUsers = instantiateUsers(monitor)
+
+    registeredUsers = instantiateCreateAccountUser(loggedInUser, registeredUsers, monitor)
+
+    printUserLoggedIn(loggedInUser, registeredUsers)
+
 main()

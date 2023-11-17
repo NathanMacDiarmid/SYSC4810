@@ -3,7 +3,7 @@ import random
 
 class Encrypt:
     def __init__(self) -> None:
-        self.__filePath = "\Documents\School\SYSC4810\passwd.txt"
+        self.__filePath = "passwd.txt"
         '''
         Based on examples given from assignment as well as a list of 20 most common passwords by CNBC
         https://www.cnbc.com/2023/11/16/most-common-passwords-70percent-can-be-cracked-in-less-than-a-second.html
