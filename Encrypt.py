@@ -3,11 +3,18 @@ import random
 
 class Encrypt:
     def __init__(self) -> None:
-        pass
+        self.__filePath = "\Documents\School\SYSC4810\passwd.txt"
+        '''
+        Based on examples given from assignment as well as a list of 20 most common passwords by CNBC
+        https://www.cnbc.com/2023/11/16/most-common-passwords-70percent-can-be-cracked-in-less-than-a-second.html
+        '''
+        self.__weakPswd = ["Password1!", "Qwert123!", "Qaz123%wsx", "12345678", "admin123",
+                    "123456789", "password", "Aa123456", "1234567890", "UNKNOWN!",
+                    "Password", "12345678910", "********"]
 
     def createAccount(self, username, passwd) -> bool:
         if (self.checkPswd(username, passwd) and self.checkUsername(username)):
-            file = open("passwd.txt", "a")
+            file = open(self.__filePath, "a")
             salt = str(random.getrandbits(8))
             passwd = salt + passwd
             hashd = hashlib.sha512(passwd.encode())
@@ -17,7 +24,7 @@ class Encrypt:
         return False
 
     def login(self, username, passwd) -> bool:
-        file = open("passwd.txt", "r")
+        file = open(self.__filePath, "r")
         lst = []
         i = 0
         for line in file:
@@ -28,14 +35,18 @@ class Encrypt:
         file.close()
         granted = False
         usernameExists = False
+        i = 0
+        userIndex = 0
         for acc in lst:
             if (acc[0] == username):
                 usernameExists = True
                 passwd = acc[1] + passwd
+                userIndex = i
                 hashd = hashlib.sha512(passwd.encode())
                 if (hashd.hexdigest() == acc[2]):
                     granted = True
-        return (granted, usernameExists, lst[0][0])
+            i += 1
+        return (granted, usernameExists, lst[userIndex][0])
     
     def checkUsername(self, username) -> bool:
         file = open("passwd.txt", "r")
@@ -46,14 +57,7 @@ class Encrypt:
         return True
     
     def checkPswd(self, username, passwd) -> bool:
-        '''
-        Based on examples given from assignment as well as a list of 20 most common passwords by CNBC
-        https://www.cnbc.com/2023/11/16/most-common-passwords-70percent-can-be-cracked-in-less-than-a-second.html
-        '''
-        weakPswd = ["Password1!", "Qwert123!", "Qaz123%wsx", "12345678", "admin123",
-                    "123456789", "password", "Aa123456", "1234567890", "UNKNOWN!",
-                    "Password", "12345678910", "********"]
-        for wp in weakPswd:
+        for wp in self.__weakPswd:
             if (passwd == wp):
                 return False
         if (passwd == username):

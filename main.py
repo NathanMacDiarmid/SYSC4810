@@ -1,131 +1,115 @@
 import UI
 import User
 import ReferenceMonitor
+
 def main():
     monitor = ReferenceMonitor.ReferenceMonitor()
     ui = UI.UI()
-    name = ui.renderUI()
-
-    #testUser = User.User("Name Here", "Happy")
+    loggedInUser = ui.renderUI()
 
     mischa = User.User("mischa", "Mischa Lowery", "Client")
-    mischa.readPermissions = monitor.assignReadPermission(mischa.role)
-    mischa.writePermissions = monitor.assignWritePermission(mischa.role)
+    veronica = User.User("veronica", "Veronica Perez", "Client")
 
-    if (name == mischa.username):
-        print("\n")
-        print("Username (ID): " + mischa.username)
-        print("Role: " + mischa.role)
-        print("Read Permissions:")
-        for i in mischa.readPermissions:
-            print(i)
-        print("Write Permissions:")
-        for j in mischa.writePermissions:
-            print(j)
+    winston = User.User("winston", "Winston Callahan", "Teller")
+    kelan = User.User("kelan", "Kelan Gough", "Teller")
 
-    '''veronica = User.User("Veronica Perez", "Client")
+    nelson = User.User("nelson", "Nelson Wilkins", "Financial Advisor")
+    kelsie = User.User("kelsie", "Kelsie Chang", "Financial Advisor")
 
-    winston = User.User("Winston Callahan", "Teller")
-    kelan = User.User("Kelan Gough", "Teller")
+    howard = User.User("howard", "Howard Linkler", "Compliance Officer")
+    stefania = User.User("stefania", "Stefania Smart", "Compliance Officer")
 
-    nelson = User.User("Nelson Wilkins", "Financial Advisor")
-    kelsie = User.User("Kelsie Chang", "Financial Advisor")
+    willow = User.User("willow", "Willow Garza", "Premium Client")
+    nala = User.User("nala", "Nala Preston", "Premium Client")
 
-    howard = User.User("Howard Linkler", "Compliance Officer")
-    stefania = User.User("Stefania Smart", "Compliance Officer")
+    stacy = User.User("stacy", "Stacy Kent", "Investment Analyst")
+    keikilana = User.User("keikilana", "Keikilana Kapahu", "Investment Analyst")
 
-    willow = User.User("Willow Garza", "Premium Client")
-    nala = User.User("Nala Preston", "Premium Client")
+    kodi = User.User("kodi", "Kodi Matthews", "Financial Planner")
+    malikah = User.User("malikah", "Malikah Wu", "Financial Planner")
 
-    stacy = User.User("Stacy Kent", "Investment Analyst")
-    keikilana = User.User("Keikilana Kapahu", "Investment Analyst")
+    caroline = User.User("caroline", "Caroline Lopez", "Technical Support")
+    pawel = User.User("pawel", "Pawel Barclay", "Technical Support")
 
-    kodi = User.User("Kodi Matthews", "Financial Planner")
-    malikah = User.User("Malikah Wu", "Financial Planner")
-
-    caroline = User.User("Caroline Lopez", "Technical Support")
-    pawel = User.User("Pawel Barclay", "Technical Support")
+    registeredUsers = [mischa, veronica, kelan, nelson, howard, stefania, pawel,
+                       willow, nala, stacy, keikilana, kodi, malikah, caroline]
+    
+    userFound = False
+    for i in registeredUsers:
+        if (loggedInUser == i.getUsername()):
+            userFound = True
+    if (not userFound and loggedInUser != ""):
+        newUser = User.User(loggedInUser, loggedInUser, "Client")
+        registeredUsers.append(newUser)
+        newUser.setReadPermissions(monitor.assignReadPermission(newUser.getRole()))
+        newUser.setWritePermissions(monitor.assignWritePermission(newUser.getRole()))
 
     # Assign Read Permission
 
-    testUser.readPermissions = monitor.assignReadPermission(testUser.role)
+    mischa.setReadPermissions(monitor.assignReadPermission(mischa.getRole()))
+    veronica.setReadPermissions(monitor.assignReadPermission(veronica.getRole()))
 
-    mischa.readPermissions = monitor.assignReadPermission(mischa.role)
-    veronica.readPermissions = monitor.assignReadPermission(veronica.role)
+    winston.setReadPermissions(monitor.assignReadPermission(winston.getRole()))
+    kelan.setReadPermissions(monitor.assignReadPermission(kelan.getRole()))
 
-    winston.readPermissions = monitor.assignReadPermission(winston.role)
-    kelan.readPermissions = monitor.assignReadPermission(kelan.role)
+    nelson.setReadPermissions(monitor.assignReadPermission(nelson.getRole()))
+    kelsie.setReadPermissions(monitor.assignReadPermission(kelsie.getRole()))
 
-    nelson.readPermissions = monitor.assignReadPermission(nelson.role)
-    kelsie.readPermissions = monitor.assignReadPermission(kelsie.role)
+    howard.setReadPermissions(monitor.assignReadPermission(howard.getRole()))
+    stefania.setReadPermissions(monitor.assignReadPermission(stefania.getRole()))
 
-    howard.readPermissions = monitor.assignReadPermission(howard.role)
-    stefania.readPermissions = monitor.assignReadPermission(stefania.role)
+    willow.setReadPermissions(monitor.assignReadPermission(willow.getRole()))
+    nala.setReadPermissions(monitor.assignReadPermission(nala.getRole()))
 
-    willow.readPermissions = monitor.assignReadPermission(willow.role)
-    nala.readPermissions = monitor.assignReadPermission(nala.role)
+    stacy.setReadPermissions(monitor.assignReadPermission(stacy.getRole()))
+    keikilana.setReadPermissions(monitor.assignReadPermission(keikilana.getRole()))
 
-    stacy.readPermissions = monitor.assignReadPermission(stacy.role)
-    keikilana.readPermissions = monitor.assignReadPermission(keikilana.role)
+    kodi.setReadPermissions(monitor.assignReadPermission(kodi.getRole()))
+    malikah.setReadPermissions(monitor.assignReadPermission(malikah.getRole()))
 
-    kodi.readPermissions = monitor.assignReadPermission(kodi.role)
-    malikah.readPermissions = monitor.assignReadPermission(malikah.role)
-
-    caroline.readPermissions = monitor.assignReadPermission(caroline.role)
-    pawel.readPermissions = monitor.assignReadPermission(pawel.role)
+    caroline.setReadPermissions(monitor.assignReadPermission(caroline.getRole()))
+    pawel.setReadPermissions(monitor.assignReadPermission(pawel.getRole()))
 
     # Assign Write Permission
 
-    testUser.writePermissions = monitor.assignWritePermission(testUser.role)
+    mischa.setWritePermissions(monitor.assignWritePermission(mischa.getRole()))
+    veronica.setWritePermissions(monitor.assignWritePermission(veronica.getRole()))
 
-    mischa.writePermissions = monitor.assignWritePermission(mischa.role)
-    veronica.writePermissions = monitor.assignWritePermission(veronica.role)
+    winston.setWritePermissions(monitor.assignWritePermission(winston.getRole()))
+    kelan.setWritePermissions(monitor.assignWritePermission(kelan.getRole()))
 
-    winston.writePermissions = monitor.assignWritePermission(winston.role)
-    kelan.writePermissions = monitor.assignWritePermission(kelan.role)
+    nelson.setWritePermissions(monitor.assignWritePermission(nelson.getRole()))
+    kelsie.setWritePermissions(monitor.assignWritePermission(kelsie.getRole()))
 
-    nelson.writePermissions = monitor.assignWritePermission(nelson.role)
-    kelsie.writePermissions = monitor.assignWritePermission(kelsie.role)
+    howard.setWritePermissions(monitor.assignWritePermission(howard.getRole()))
+    stefania.setWritePermissions(monitor.assignWritePermission(stefania.getRole()))
 
-    howard.writePermissions = monitor.assignWritePermission(howard.role)
-    stefania.writePermissions = monitor.assignWritePermission(stefania.role)
+    willow.setWritePermissions(monitor.assignWritePermission(willow.getRole()))
+    nala.setWritePermissions(monitor.assignWritePermission(nala.getRole()))
 
-    willow.writePermissions = monitor.assignWritePermission(willow.role)
-    nala.writePermissions = monitor.assignWritePermission(nala.role)
+    stacy.setWritePermissions(monitor.assignWritePermission(stacy.getRole()))
+    keikilana.setWritePermissions(monitor.assignWritePermission(keikilana.getRole()))
 
-    stacy.writePermissions = monitor.assignWritePermission(stacy.role)
-    keikilana.writePermissions = monitor.assignWritePermission(keikilana.role)
+    kodi.setWritePermissions(monitor.assignWritePermission(kodi.getRole()))
+    malikah.setWritePermissions(monitor.assignWritePermission(malikah.getRole()))
 
-    kodi.writePermissions = monitor.assignWritePermission(kodi.role)
-    malikah.writePermissions = monitor.assignWritePermission(malikah.role)
+    caroline.setWritePermissions(monitor.assignWritePermission(caroline.getRole()))
+    pawel.setWritePermissions(monitor.assignWritePermission(pawel.getRole()))
 
-    caroline.writePermissions = monitor.assignWritePermission(caroline.role)
-    pawel.writePermissions = monitor.assignWritePermission(pawel.role)
-
-    print(mischa)
-    print(veronica)
-
-    print(winston)
-    print(kelan)
-
-    print(nelson)
-    print(kelsie)
-
-    print(howard)
-    print(stefania)
-
-    print(willow)
-    print(nala)
-
-    print(stacy)
-    print(keikilana)
-
-    print(kodi)
-    print(malikah)
-
-    print(caroline)
-    print(pawel)
-
-    print(testUser)'''
-
+    for user in registeredUsers:
+        if (loggedInUser == user.getUsername()):
+            print("Username (ID): " + user.getUsername())
+            print("Role: " + user.getRole())
+            print("\nRead Permissions:")
+            if (user.getReadPermissions() == []):
+                print("No read permissions")
+            else:
+                for i in user.getReadPermissions():
+                    print(i)
+            print("\nWrite Permissions:")
+            if (user.getWritePermissions() == []):
+                print("No write permissions")
+            else:
+                for j in user.getWritePermissions():
+                    print(j)
 main()

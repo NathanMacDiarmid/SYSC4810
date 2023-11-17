@@ -1,16 +1,28 @@
 class User:
     def __init__(self, username, name, role) -> None:
-        self.username = username
-        self.name = name
-        self.role = role
-        self.readPermissions = []
-        self.writePermissions = []
+        self.__username = username
+        self.__name = name
+        self.__role = role
+        self.__readPermissions = []
+        self.__writePermissions = []
     
-    def __str__(self) -> str:
-        return f"{self.name} ({self.role})\nRead Permissions: {self.readPermissions}\nWrite Permissions: {self.writePermissions}"
+    def getUsername(self) -> str:
+        return self.__username
     
-    def addReadPermissions(self, elem) -> None:
-        self.readPermissions.append(elem)
+    def getName(self) -> str:
+        return self.__name
+    
+    def getRole(self) -> str:
+        return self.__role
+    
+    def setReadPermissions(self, permissions) -> None:
+        self.__readPermissions = permissions
 
-    def addWritePermissions(self, elem) -> None:
-        self.writePermissions.append(elem)
+    def setWritePermissions(self, permissions) -> None:
+        self.__writePermissions = permissions
+
+    def getReadPermissions(self) -> list:
+        return self.__readPermissions
+    
+    def getWritePermissions(self) -> list:
+        return self.__writePermissions
