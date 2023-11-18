@@ -82,13 +82,13 @@ def instantiateUsers(monitor) -> list:
     return [mischa, veronica, kelan, nelson, howard, stefania, pawel, winston,
             willow, nala, stacy, keikilana, kodi, malikah, caroline, kelsie]
 
-def instantiateCreateAccountUser(loggedInUser, registeredUsers, monitor) -> list:
+def instantiateCreateAccountUser(newUserID, registeredUsers, monitor) -> list:
     userFound = False
     for i in registeredUsers:
-        if (loggedInUser == i.getUsername()):
+        if (newUserID == i.getUsername()):
             userFound = True
-    if (not userFound and loggedInUser != ""):
-        newUser = User.User(loggedInUser, loggedInUser, "Client")
+    if (not userFound and newUserID != ""):
+        newUser = User.User(newUserID, newUserID, "Client")
         registeredUsers.append(newUser)
         newUser.setReadPermissions(monitor.assignReadPermission(newUser.getRole()))
         newUser.setWritePermissions(monitor.assignWritePermission(newUser.getRole()))
@@ -118,9 +118,9 @@ def main():
     monitor = ReferenceMonitor.ReferenceMonitor()
     ui = UI.UI()
 
-    loggedInUser = ui.renderUI()
-
     registeredUsers = instantiateUsers(monitor)
+
+    loggedInUser = ui.renderUI()
 
     registeredUsers = instantiateCreateAccountUser(loggedInUser, registeredUsers, monitor)
 

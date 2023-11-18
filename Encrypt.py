@@ -3,12 +3,12 @@ import random
 
 class Encrypt:
     def __init__(self) -> None:
-        self.__filePath = "passwd.txt"
+        self.__filePath = "\Documents\School\SYSC4810\passwd.txt"
         '''
         Based on examples given from assignment as well as a list of 20 most common passwords by CNBC
         https://www.cnbc.com/2023/11/16/most-common-passwords-70percent-can-be-cracked-in-less-than-a-second.html
         '''
-        self.__weakPswd = ["Password1!", "Qwert123!", "Qaz123%wsx", "12345678", "admin123",
+        self.__weakPswdLst = ["Password1!", "Qwert123!", "Qaz123%wsx", "12345678", "admin123",
                     "123456789", "password", "Aa123456", "1234567890", "UNKNOWN!",
                     "Password", "12345678910", "********"]
 
@@ -49,7 +49,7 @@ class Encrypt:
         return (granted, usernameExists, lst[userIndex][0])
     
     def checkUsername(self, username) -> bool:
-        file = open("passwd.txt", "r")
+        file = open(self.__filePath, "r")
         for line in file:
             line = line.split(" ")
             if (line[0] == username):
@@ -57,7 +57,7 @@ class Encrypt:
         return True
     
     def checkPswd(self, username, passwd) -> bool:
-        for wp in self.__weakPswd:
+        for wp in self.__weakPswdLst:
             if (passwd == wp):
                 return False
         if (passwd == username):
