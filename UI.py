@@ -29,7 +29,8 @@ class UI:
         username = input("Enter username: ")
         password = (getpass.getpass("Enter password: "))
         if (not self.__encrypt.createAccount(username, password)):
-            print("INVALID PASSWORD")
+            print("INVALID INPUT\n")
+            print("Username must be unique")
             print("Password must include:")
             print("- between 8-12 characters in length")
             print("- one upper case letter")
@@ -39,5 +40,4 @@ class UI:
             print("- not have calendar date pattern")
             print("- not have license plate pattern")
             print("- not have phone number pattern")
-            print("USERNAME MUST BE UNIQUE")
             self.renderNewUserUI()
