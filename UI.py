@@ -37,7 +37,7 @@ class UI:
             print("- one number")
             print("- one special character (!, @, #, $, %, *, ?)")
             print("- not have calendar date pattern")
-            print("- not have licence plate pattern")
+            print("- not have license plate pattern")
             print("- not have phone number pattern")
             print("USERNAME MUST BE UNIQUE")
             self.renderNewUserUI()
