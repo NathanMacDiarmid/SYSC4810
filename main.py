@@ -2,7 +2,7 @@ import UI
 import User
 import ReferenceMonitor
 
-def instantiateUsers(monitor) -> list:
+def instantiateUsers() -> list:
     mischa = User.User("mischa", "Mischa Lowery", "Client")
     veronica = User.User("veronica", "Veronica Perez", "Client")
 
@@ -27,58 +27,6 @@ def instantiateUsers(monitor) -> list:
     caroline = User.User("caroline", "Caroline Lopez", "Technical Support")
     pawel = User.User("pawel", "Pawel Barclay", "Technical Support")
 
-    # Assign Read Permission
-
-    mischa.setReadPermissions(monitor.assignReadPermission(mischa.getRole()))
-    veronica.setReadPermissions(monitor.assignReadPermission(veronica.getRole()))
-
-    winston.setReadPermissions(monitor.assignReadPermission(winston.getRole()))
-    kelan.setReadPermissions(monitor.assignReadPermission(kelan.getRole()))
-
-    nelson.setReadPermissions(monitor.assignReadPermission(nelson.getRole()))
-    kelsie.setReadPermissions(monitor.assignReadPermission(kelsie.getRole()))
-
-    howard.setReadPermissions(monitor.assignReadPermission(howard.getRole()))
-    stefania.setReadPermissions(monitor.assignReadPermission(stefania.getRole()))
-
-    willow.setReadPermissions(monitor.assignReadPermission(willow.getRole()))
-    nala.setReadPermissions(monitor.assignReadPermission(nala.getRole()))
-
-    stacy.setReadPermissions(monitor.assignReadPermission(stacy.getRole()))
-    keikilana.setReadPermissions(monitor.assignReadPermission(keikilana.getRole()))
-
-    kodi.setReadPermissions(monitor.assignReadPermission(kodi.getRole()))
-    malikah.setReadPermissions(monitor.assignReadPermission(malikah.getRole()))
-
-    caroline.setReadPermissions(monitor.assignReadPermission(caroline.getRole()))
-    pawel.setReadPermissions(monitor.assignReadPermission(pawel.getRole()))
-
-     # Assign Write Permission
-
-    mischa.setWritePermissions(monitor.assignWritePermission(mischa.getRole()))
-    veronica.setWritePermissions(monitor.assignWritePermission(veronica.getRole()))
-
-    winston.setWritePermissions(monitor.assignWritePermission(winston.getRole()))
-    kelan.setWritePermissions(monitor.assignWritePermission(kelan.getRole()))
-
-    nelson.setWritePermissions(monitor.assignWritePermission(nelson.getRole()))
-    kelsie.setWritePermissions(monitor.assignWritePermission(kelsie.getRole()))
-
-    howard.setWritePermissions(monitor.assignWritePermission(howard.getRole()))
-    stefania.setWritePermissions(monitor.assignWritePermission(stefania.getRole()))
-
-    willow.setWritePermissions(monitor.assignWritePermission(willow.getRole()))
-    nala.setWritePermissions(monitor.assignWritePermission(nala.getRole()))
-
-    stacy.setWritePermissions(monitor.assignWritePermission(stacy.getRole()))
-    keikilana.setWritePermissions(monitor.assignWritePermission(keikilana.getRole()))
-
-    kodi.setWritePermissions(monitor.assignWritePermission(kodi.getRole()))
-    malikah.setWritePermissions(monitor.assignWritePermission(malikah.getRole()))
-
-    caroline.setWritePermissions(monitor.assignWritePermission(caroline.getRole()))
-    pawel.setWritePermissions(monitor.assignWritePermission(pawel.getRole()))
-
     return [mischa, veronica, kelan, nelson, howard, stefania, pawel, winston,
             willow, nala, stacy, keikilana, kodi, malikah, caroline, kelsie]
 
@@ -87,6 +35,8 @@ def instantiateCreateAccountUser(newUserID, registeredUsers, monitor) -> list:
     for i in registeredUsers:
         if (newUserID == i.getUsername()):
             userFound = True
+            i.setReadPermissions(monitor.assignReadPermission(i.getRole()))
+            i.setWritePermissions(monitor.assignWritePermission(i.getRole()))
     if (not userFound and newUserID != ""):
         newUser = User.User(newUserID, newUserID, "Client")
         registeredUsers.append(newUser)
@@ -118,7 +68,7 @@ def main():
     monitor = ReferenceMonitor.ReferenceMonitor()
     ui = UI.UI()
 
-    registeredUsers = instantiateUsers(monitor)
+    registeredUsers = instantiateUsers()
 
     loggedInUser = ui.renderUI()
 

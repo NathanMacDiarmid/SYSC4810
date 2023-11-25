@@ -32,7 +32,7 @@ class Encrypt:
                     file.close()
                     return (True, usernameExists, username)
         file.close()
-        return (False, usernameExists, "")
+        return (False, usernameExists, username)
     
     def checkUsername(self, username) -> bool:
         file = open(self.__filePath, "r")
