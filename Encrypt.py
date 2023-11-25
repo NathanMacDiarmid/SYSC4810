@@ -20,28 +20,19 @@ class Encrypt:
 
     def login(self, username, passwd) -> bool:
         file = open(self.__filePath, "r")
-        lst = []
-        i = 0
-        for line in file:
-            line = line.split(" ")
-            lst.append(line)
-            lst[i][2] = lst[i][2].replace("\n", "")
-            i += 1
-        file.close()
-        granted = False
         usernameExists = False
-        i = 0
-        userIndex = 0
-        for acc in lst:
+        for acc in file:
+            acc = acc.split(" ")
+            acc[2] = acc[2].replace("\n", "")
             if (acc[0] == username):
                 usernameExists = True
                 passwd = acc[1] + passwd
-                userIndex = i
                 hashd = hashlib.sha512(passwd.encode())
                 if (hashd.hexdigest() == acc[2]):
-                    granted = True
-            i += 1
-        return (granted, usernameExists, lst[userIndex][0])
+                    file.close()
+                    return (True, usernameExists, username)
+        file.close()
+        return (False, usernameExists, "")
     
     def checkUsername(self, username) -> bool:
         file = open(self.__filePath, "r")
