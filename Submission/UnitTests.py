@@ -1,0 +1,5 @@
+import AccessControlMatrixTests
+import EnrolmentTests
+import PasswordCheckerTests
+import LoginTests
+import AccessControlEnforcementTests

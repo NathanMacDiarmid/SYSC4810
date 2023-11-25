@@ -1,0 +1,9 @@
+Role,Account balance,Investment portfolio,FA contact details,FI contact details,FP contact details,Clients account balance,Clients investment portfolio,Money market instruments,Private consumer instruments,Derivatives trading,Interest instruments,Clients account access,Validate investment portfolio modifications
+Client,R,R,R,-,-,-,-,-,-,-,-,-,-
+Premium Client,R,RW,-,R,R,-,-,-,-,-,-,-,-
+Financial Planner,-,-,-,-,-,RW,RW,R,R,-,-,-,-
+Financial Advisor,-,-,-,-,-,RW,RW,-,R,-,-,-,-
+Investment Analyst,-,-,-,-,-,RW,RW,R,-,R,R,R,R
+Technical Support,-,-,-,-,-,R,R,-,-,-,-,RW,RW
+Teller,-,-,-,-,-,R,R,-,-,-,-,-,-
+Compliance Officer,-,-,-,-,-,R,R,-,-,-,-,-,R
