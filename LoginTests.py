@@ -19,7 +19,7 @@ def testWrongPassword():
     accessGranted, usernameExists, username = encrypt.login('mischa', 'Ilvoecats2!')
     assert(accessGranted == False)
     assert(usernameExists == True)
-    assert(username == "")
+    assert(username == "mischa")
     print('Passing Wrong Password tests\n')
 
 def testUserNotExist():
@@ -28,7 +28,7 @@ def testUserNotExist():
     accessGranted, usernameExists, username = encrypt.login('nathan', 'Ilvoecats2!')
     assert(accessGranted == False)
     assert(usernameExists == False)
-    assert(username == "")
+    assert(username == "nathan")
     print('Passing Username Doesnt Exist tests\n')
 
 def removeTestUser(testUser):
